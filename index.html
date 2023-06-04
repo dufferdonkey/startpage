@@ -1,1 +1,158 @@
+<!DOCTYPE html>
 
+<head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+        .search-form {
+            display: flex;
+            align-items: center;
+            border: 1px solid #262626;
+            border-radius: 4px;
+            overflow: hidden;
+            max-width: 700px;
+            margin: 0 auto;
+            margin-bottom: 30px;
+        }
+
+        .search-form input[type="text"] {
+            flex: 1;
+            padding: 10px 20px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: #d4be98;
+            background-color: #262626;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+        }
+
+        .favorites {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 19px;
+            text-align: left;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        .list {
+            background-color: #262626;
+            padding: 9px;
+            color: #a9b665;
+            font-weight: bold;
+            font-family: courier;
+            border: 1px solid #262626;
+            border-radius: 10px;
+        }
+
+        a {
+            color: #d4be98;
+            font-weight: bold;
+            text-decoration: none;
+            line-height: 0.9;
+        }
+    </style>
+</head>
+
+<body style="text-align: center; background-color: #32302f; color: #d4be98; font-family: courier;">
+    <canvas id="time" width="360" height="150" style="margin-top: 0;"></canvas>
+
+    <form action="https://www.google.com/search">
+
+        <label for="searchbox">
+            Google
+        </label>
+
+        <input id="searchbox" type="text" name="q">
+        <input type="submit" value="Search!">
+
+    </form>
+
+    <div class="favorites">
+        <div class="list">
+            # Social
+            <ul>
+                <li><a href="https://twitter.com/">Twitter</a></li>
+                <li><a href="https://www.instagram.com/">Instagram</a></li>
+                <li><a href="https://www.reddit.com/">Reddit</a></li>
+                <li><a href="https://github.com/">Github</a></li>
+            </ul>
+        </div>
+
+        <div class="list">
+            # Google
+            <ul>
+                <li><a href="https://www.youtube.com/">Youtube</a></li>
+                <li><a href="https://drive.google.com/">Drive</a></li>
+                <li><a href="https://translate.google.co.in/">Translate</a></li>
+                <li><a href="https://www.google.com/maps">Map</a></li>
+            </ul>
+        </div>
+
+        <div class="list">
+            # Trade
+            <ul>
+                <li><a href="#">Groww</a></li>
+                <li><a href="#">Kite</a></li>
+                <li><a href="#">TradingView</a></li>
+            </ul>
+        </div>
+
+        <div class="list">
+            # Mail
+            <ul>
+                <li><a href="https://mail.google.com/">Gmail</a></li>
+                <li><a href="https://mail.yahoo.com/">Yahoo!</a></li>
+                <li><a href="https://mail.proton.me/">Proton</a></li>
+            </ul>
+        </div>
+
+        <div class="list">
+            # DNS
+            <ul>
+                <li><a href="#">AdGuard</a></li>
+                <li><a href="#">NextDNS</a></li>
+                <li><a href="#">AdGuard DNS</a></li>
+
+            </ul>
+        </div>
+
+        <div class="list">
+            $ Local
+            <ul>
+                <li><a href="#">TP-Link</a></li>
+                <li><a href="#">Portainer</a></li>
+                <li><a href="#">SpeedTest</a></li>
+                <li><a href="#">SmokePing</a></li>
+                <li><a href="#">Plex</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        // clock
+        const canvas = document.getElementById("time");
+        const context = canvas.getContext("2d");
+
+        function updateCanvas() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            context.font = "bold 50px courier";
+            context.fillStyle = "#d8a657";
+
+            context.fillText(currentTime, 60, 80);
+        }
+
+        setInterval(updateCanvas, 1000);
+    </script>
+
+</body>
