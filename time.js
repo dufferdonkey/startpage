@@ -1,14 +1,15 @@
-function realtimeClock() {
-
-    var clockerhehe = new Date();
-    var hrs = clockerhehe.getHours();
-    var mins = clockerhehe.getMinutes();
-    var amPm = ( hrs < 12) ? "AM" : "PM";
-
-    hrs = (hrs > 12) ? hrs - 12 : hrs;
-    hrs = ("0" + hrs).slice(-2);
-    mins = ("0" + mins).slice(-2);
-
-    document.getElementById('clock').innerHTML = hrs + ":" + mins + " " + amPm;
-    var t = setTimeout(realtimeClock, 500);
+function updateClock() {
+  const clock = document.getElementById("clock");
+  const now = new Date();
+  clock.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
+
+function searchGoogle() {
+  const query = document.getElementById("searchBox").value.trim();
+  if (query) {
+    window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, "_blank");
+  }
+}
+
+setInterval(updateClock, 1000);
+updateClock();
