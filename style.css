@@ -1,1 +1,87 @@
 
+body {
+  background-color: #1e1e1e;
+  color: #dcdcdc;
+  font-family: 'Courier New', monospace;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  min-height: 100vh;
+  padding-top: 40px;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+}
+
+#clock {
+  text-align: center;
+  font-size: 4rem;
+  color: #fbbf24;
+  margin-bottom: 20px;
+}
+
+.search {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.search input {
+  padding: 6px 10px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #2c2c2c;
+  color: white;
+}
+
+.search button {
+  padding: 6px 12px;
+  font-size: 1rem;
+  border: none;
+  background-color: #444;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #121212;
+}
+
+.card h2 {
+  color: #a3e635;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.card li {
+  margin-bottom: 8px;
+}
+
+.card a {
+  color: #facc15;
+  text-decoration: none;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
