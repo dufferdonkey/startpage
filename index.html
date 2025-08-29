@@ -22,7 +22,7 @@
           <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
           <li><a href="https://reddit.com" target="_blank">Reddit</a></li>
           <li><a href="https://github.com" target="_blank">GitHub</a></li>
-          <li><a href="https://pintrest.com" target="_blank">Pintrest</a></li>
+          <li><a href="https://pinterest.com" target="_blank">Pinterest</a></li>
         </ul>
       </div>
       <div class="card">
@@ -31,7 +31,7 @@
           <li><a href="https://youtube.com" target="_blank">YouTube</a></li>
           <li><a href="https://drive.google.com" target="_blank">Drive</a></li>
           <li><a href="https://translate.google.com" target="_blank">Translate</a></li>
-          <li><a href="https://maps.google.com" target="_blank">Map</a></li>
+          <li><a href="https://maps.google.com" target="_blank">Maps</a></li>
         </ul>
       </div>
       <div class="card">
@@ -70,36 +70,6 @@
       </div>
     </div>
   </div>
-function updateClock() {
-  const clock = document.getElementById("clock");
-  const now = new Date();
-  clock.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
-
-function searchGoogle() {
-  const query = document.getElementById("searchBox").value.trim();
-  if (query) {
-    window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, "_blank");
-  }
-}
-
-setInterval(updateClock, 1000);
-updateClock();
   <script src="script.js"></script>
-function updateClock() {
-  const clock = document.getElementById("clock");
-  const now = new Date();
-  clock.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
-
-function searchGoogle() {
-  const query = document.getElementById("searchBox").value.trim();
-  if (query) {
-    window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, "_blank");
-  }
-}
-
-setInterval(updateClock, 1000);
-updateClock();
 </body>
 </html>
