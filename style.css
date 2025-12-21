@@ -124,6 +124,33 @@ body {
   text-decoration: underline;
 }
 
+/* Weather styling */
+#weather {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #666;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+#weather-temp {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+#weather-desc {
+  text-transform: capitalize;
+  color: #777;
+}
+
+#weather-location {
+  color: #999;
+  font-size: 0.9rem;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   #clock {
