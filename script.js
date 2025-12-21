@@ -17,6 +17,46 @@ function updateClock() {
   dateEl.textContent = now.toLocaleDateString('en-US', options);
 }
 
+// Weather functionality with auto-location
+const API_KEY = 'a40806000b9428bb10bb1e2709af4af5'; // Replace with your actual API key
+
+async function updateWeather() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      
+      try {
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+        );
+        const data = await response.json();
+        
+        const temp = Math.round(data.main.temp);
+        const description = data.weather[0].description;
+        const location = data.name;
+        
+        document.getElementById('weather-temp').textContent = `${temp}°C`;
+        document.getElementById('weather-desc').textContent = description;
+        document.getElementById('weather-location').textContent = location;
+      } catch (error) {
+        console.error('Error fetching weather:', error);
+        document.getElementById('weather-temp').textContent = 'Weather unavailable';
+      }
+    }, (error) => {
+      console.error('Geolocation error:', error);
+      document.getElementById('weather-temp').textContent = 'Location access denied';
+    });
+  } else {
+    document.getElementById('weather-temp').textContent = 'Geolocation not supported';
+  }
+}
+
+// Call weather function on page load
+updateWeather();
+// Update weather every 30 minutes
+setInterval(updateWeather, 1800000);
+
 // Google search functionality
 function searchGoogle() {
   const query = document.getElementById("searchBox").value.trim();
