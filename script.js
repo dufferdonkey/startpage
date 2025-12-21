@@ -1,6 +1,7 @@
 // Clock functionality
 function updateClock() {
   const clock = document.getElementById("clock");
+  const dateEl = document.getElementById("date");
   const now = new Date();
   
   const hours = now.getHours();
@@ -10,6 +11,10 @@ function updateClock() {
   const displayHours = String(hours % 12 || 12).padStart(2, '0');
   
   clock.textContent = `${displayHours}:${minutes}:${seconds} ${ampm}`;
+  
+  // Date and Day
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  dateEl.textContent = now.toLocaleDateString('en-US', options);
 }
 
 // Google search functionality
