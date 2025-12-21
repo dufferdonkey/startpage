@@ -16,21 +16,64 @@ body {
   max-width: 1000px;
 }
 
-#clock {
-  text-align: center;
-  font-size: 4rem;
-  color: #fbbf24;
-  margin-bottom: 20px;
+/* Top Right Corner - Clock and Date */
+.top-right {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  text-align: right;
+  z-index: 1000;
 }
 
-/* Date styling */
+#clock {
+  font-size: 2.5rem; /* Smaller than before */
+  font-weight: 400;
+  color: #333;
+  margin: 0;
+  line-height: 1;
+}
+
 #date {
-  font-size: 1.5rem;
-  color: #888;
-  margin-top: 10px;
-  font-weight: 300;
-  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 8px;
+  font-weight: 700; /* Bold style */
+  text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+/* Top Left Corner - Weather */
+.top-left {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  text-align: left;
+  z-index: 1000;
+}
+
+#weather {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#weather-temp {
+  font-size: 2rem;
+  font-weight: 700; /* Bolder font */
+  color: #333;
+}
+
+#weather-desc {
+  text-transform: capitalize;
+  color: #666;
+  font-size: 1rem;
+  font-weight: 600; /* Bolder */
+}
+
+#weather-location {
+  color: #888;
+  font-size: 0.9rem;
+  font-weight: 600; /* Bolder */
 }
 
 .search {
@@ -124,32 +167,6 @@ body {
   text-decoration: underline;
 }
 
-/* Weather styling */
-#weather {
-  margin-top: 20px;
-  font-size: 1.2rem;
-  color: #666;
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  align-items: center;
-}
-
-#weather-temp {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #333;
-}
-
-#weather-desc {
-  text-transform: capitalize;
-  color: #777;
-}
-
-#weather-location {
-  color: #999;
-  font-size: 0.9rem;
-}
 
 /* Responsive design */
 @media (max-width: 768px) {
@@ -174,5 +191,28 @@ body {
   
   .search button {
     width: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-right, .top-left {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    text-align: center;
+    margin: 20px;
+  }
+  
+  #clock {
+    font-size: 2rem;
+  }
+  
+  #date {
+    font-size: 1rem;
+  }
+  
+  #weather-temp {
+    font-size: 1.5rem;
   }
 }
