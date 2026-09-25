@@ -9,26 +9,34 @@
 </head>
 <body>
   <div class="container">
-    <div class="top-right">
-  <h1 id="clock">--:--</h1>
-  <p id="date" class="date"></p>
-</div>
-    <div class="top-left">
-  <div id="weather" class="weather">
-    <span id="weather-temp"></span>
-    <span id="weather-desc"></span>
-    <span id="weather-location"></span>
-  </div>
-</div>
-    <div class="search">
-      <label for="searchBox">Google</label>
-      <input type="text" id="searchBox" placeholder="Search Google..." />
-      <button onclick="searchGoogle()">Search!</button>
+
+    <div class="topbar">
+      <div id="weather" class="weather">
+        <span id="weather-icon" class="weather-icon">🌤️</span>
+        <div class="weather-info">
+          <span id="weather-temp" class="weather-temp">--°</span>
+          <span id="weather-desc" class="weather-desc">Loading...</span>
+          <span id="weather-location" class="weather-location"></span>
+        </div>
+      </div>
+
+      <div id="clockbox" class="clockbox">
+        <h1 id="clock" class="clock-time">--:--</h1>
+        <p id="date" class="clock-date"></p>
+      </div>
     </div>
+
+    <div class="search">
+  <label for="searchBox">DuckDuckGo</label>
+  <input type="text" id="searchBox" placeholder="Search DuckDuckGo..." />
+  <button onclick="searchDuckDuckGo()">Search!</button>
+</div>
+
     <div class="grid">
-      <div class="card">
-        <h2># Social</h2>
-        <ul>
+
+      <div class="dropdown">
+        <button class="dropdown-toggle">Social</button>
+        <ul class="dropdown-menu">
           <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
           <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
           <li><a href="https://reddit.com" target="_blank">Reddit</a></li>
@@ -36,42 +44,58 @@
           <li><a href="https://pinterest.com" target="_blank">Pinterest</a></li>
         </ul>
       </div>
-      <div class="card">
-        <h2># Google</h2>
-        <ul>
+
+      <div class="dropdown">
+        <button class="dropdown-toggle">Google</button>
+        <ul class="dropdown-menu">
           <li><a href="https://youtube.com" target="_blank">YouTube</a></li>
           <li><a href="https://drive.google.com" target="_blank">Drive</a></li>
           <li><a href="https://translate.google.com" target="_blank">Translate</a></li>
           <li><a href="https://maps.google.com" target="_blank">Maps</a></li>
         </ul>
       </div>
-      <div class="card">
-        <h2># Trade</h2>
-        <ul>
+      
+      <div class="dropdown">
+        <button class="dropdown-toggle">📺 Watch</button>
+        <ul class="dropdown-menu">
+          <li><a href="https://netflix.com" target="_blank">Netflix</a></li>
+          <li><a href="https://jiohotstar.com" target="_blank">JioHotstar</a></li>
+          <li><a href="https://www.primevideo.com/" target="_blank">Prime Video</a></li>
+          <li><a href="https://www.zee5.com/" target="_blank">Zee5</a></li>
+          <li><a href="https://www.sonyliv.com/" target="_blank">SonyLiv</a></li>
+        </ul>
+      </div>
+      
+      <div class="dropdown">
+        <button class="dropdown-toggle">💰 Trade</button>
+        <ul class="dropdown-menu">
           <li><a href="https://groww.in" target="_blank">Groww</a></li>
           <li><a href="https://kite.zerodha.com" target="_blank">Kite</a></li>
           <li><a href="https://tradingview.com" target="_blank">TradingView</a></li>
         </ul>
       </div>
-      <div class="card">
-        <h2># Mail</h2>
-        <ul>
+
+      <div class="dropdown">
+        <button class="dropdown-toggle">✉️ Mail</button>
+        <ul class="dropdown-menu">
           <li><a href="https://mail.google.com" target="_blank">Gmail</a></li>
           <li><a href="https://mail.yahoo.com" target="_blank">Yahoo!</a></li>
           <li><a href="https://protonmail.com" target="_blank">Proton</a></li>
         </ul>
       </div>
-      <div class="card">
-        <h2># DNS</h2>
-        <ul>
+
+      <div class="dropdown">
+        <button class="dropdown-toggle">🖥️ DNS</button>
+        <ul class="dropdown-menu">
           <li><a href="https://adguard.com" target="_blank">AdGuard</a></li>
           <li><a href="https://nextdns.io" target="_blank">NextDNS</a></li>
           <li><a href="https://adguard-dns.io" target="_blank">AdGuard DNS</a></li>
         </ul>
       </div>
-      <div class="card">
-        <h2>$ Local</h2>
-        <ul>
+
+      <div class="dropdown">
+        <button class="dropdown-toggle">$ Local</button>
+        <ul class="dropdown-menu">
           <li><a href="http://tplinkwifi.net" target="_blank">TP-Link</a></li>
           <li><a href="http://localhost:9000" target="_blank">Portainer</a></li>
           <li><a href="https://www.speedtest.net" target="_blank">SpeedTest</a></li>
@@ -79,6 +103,7 @@
           <li><a href="http://localhost:32400" target="_blank">Plex</a></li>
         </ul>
       </div>
+
     </div>
   </div>
   <script src="script.js"></script>
