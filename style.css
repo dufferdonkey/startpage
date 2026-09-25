@@ -1,218 +1,251 @@
-body {
-  background-color: #1e1e1e;
-  color: #dcdcdc;
-  font-family: 'Courier New', monospace;
+* {
+  box-sizing: border-box;
+}
+
+html, body {
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: start;
+  height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  background: #121212;
+  color: #eee;
   min-height: 100vh;
-  padding-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
 }
 
 .container {
-  width: 90%;
-  max-width: 1000px;
-}
-
-/* Top Right Corner - Clock and Date */
-.top-right {
-  position: fixed;
-  top: 30px;
-  right: 30px;
-  text-align: right;
-  z-index: 1000;
-}
-
-#clock {
-  font-size: 2.5rem; /* Smaller than before */
-  font-weight: 400;
-  color: #333;
-  margin: 0;
-  line-height: 1;
-}
-
-#date {
-  font-size: 1.2rem;
-  color: #555;
-  margin-top: 8px;
-  font-weight: 700; /* Bold style */
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* Top Left Corner - Weather */
-.top-left {
-  position: fixed;
-  top: 30px;
-  left: 30px;
-  text-align: left;
-  z-index: 1000;
-}
-
-#weather {
+  width: 100%;
+  max-width: 900px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 24px;
 }
 
-#weather-temp {
-  font-size: 2rem;
-  font-weight: 700; /* Bolder font */
-  color: #333;
+/* ---------- Top bar (weather + clock) ---------- */
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
 }
 
-#weather-desc {
+.weather,
+.clockbox {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  max-width: 90vw;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.weather:hover,
+.clockbox:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.weather-icon {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.weather-info,
+.clockbox {
+  flex-direction: column;
+}
+
+.weather-info {
+  display: flex;
+  gap: 2px;
+  min-width: 0;
+}
+
+.weather-temp {
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.weather-desc {
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  color: #bbb;
   text-transform: capitalize;
-  color: #666;
-  font-size: 1rem;
-  font-weight: 600; /* Bolder */
 }
 
-#weather-location {
+.weather-location {
+  font-size: clamp(0.7rem, 1.8vw, 0.8rem);
   color: #888;
-  font-size: 0.9rem;
-  font-weight: 600; /* Bolder */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
+.clockbox {
+  align-items: flex-end;
+}
+
+.clock-time {
+  margin: 0;
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.clock-date {
+  margin: 2px 0 0;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  color: #999;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+/* ---------- Search ---------- */
 .search {
-  text-align: center;
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .search label {
-  display: block;
-  margin-bottom: 10px;
-  color: #a3e635;
-  font-weight: bold;
+  font-weight: 600;
+  color: #aaa;
 }
 
 .search input {
-  padding: 8px 12px;
+  flex: 1;
+  min-width: 160px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: #eee;
   font-size: 1rem;
-  border-radius: 4px;
-  border: 1px solid #444;
-  background-color: #2c2c2c;
-  color: white;
-  margin-right: 10px;
-  width: 300px;
 }
 
 .search input:focus {
   outline: none;
-  border-color: #a3e635;
+  border-color: #888;
 }
 
 .search button {
-  padding: 8px 16px;
-  font-size: 1rem;
+  padding: 10px 18px;
+  border-radius: 10px;
   border: none;
-  background-color: #a3e635;
-  color: #000;
+  background: #333;
+  color: #eee;
   cursor: pointer;
-  border-radius: 4px;
-  font-weight: bold;
-  transition: background-color 0.2s;
+  font-weight: 600;
 }
 
 .search button:hover {
-  background-color: #84cc16;
+  background: #444;
 }
 
+/* ---------- Link grid / dropdowns ---------- */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
 }
 
-.card {
-  border: 1px solid #444;
-  border-radius: 8px;
-  padding: 15px;
-  background-color: #121212;
-  transition: border-color 0.2s;
+.dropdown {
+  position: relative;
+  width: 100%;
 }
 
-.card:hover {
-  border-color: #a3e635;
-}
-
-.card h2 {
-  color: #a3e635;
+.dropdown-toggle {
+  width: 100%;
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 1rem;
   font-weight: bold;
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  margin-top: 0;
+  background: #1e1e1e;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-.card ul {
+.dropdown-toggle:hover {
+  background: #2a2a2a;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+  margin-top: 4px;
+  padding: 6px 0;
   list-style: none;
-  padding: 0;
-  margin: 0;
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  z-index: 100;
 }
 
-.card li {
-  margin-bottom: 8px;
+.dropdown-menu.open {
+  display: block;
 }
 
-.card a {
-  color: #facc15;
+.dropdown-menu li a {
+  display: block;
+  padding: 8px 16px;
+  color: #eee;
   text-decoration: none;
-  transition: color 0.2s;
+  white-space: nowrap;
 }
 
-.card a:hover {
-  color: #fbbf24;
-  text-decoration: underline;
+.dropdown-menu li a:hover {
+  background: #333;
 }
 
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-/* Responsive design */
-@media (max-width: 768px) {
-  #clock {
-    font-size: 3rem;
+  .clockbox {
+    align-items: flex-start;
   }
-  
-  .search input {
-    width: 250px;
-  }
-  
-  .grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-}
 
-@media (max-width: 480px) {
-  .search input {
-    width: 200px;
-    margin-bottom: 10px;
-  }
-  
-  .search button {
-    width: 100px;
+  .weather,
+  .clockbox {
+    padding: 10px 14px;
+    border-radius: 12px;
   }
 }
 
-@media (max-width: 768px) {
-  .top-right, .top-left {
-    position: relative;
-    top: auto;
-    right: auto;
-    left: auto;
-    text-align: center;
-    margin: 20px;
+@media (max-width: 400px) {
+  .weather-location {
+    display: none;
   }
-  
-  #clock {
-    font-size: 2rem;
+  .clock-time {
+    letter-spacing: 0.5px;
   }
-  
-  #date {
-    font-size: 1rem;
-  }
-  
-  #weather-temp {
-    font-size: 1.5rem;
+  .clock-date {
+    font-size: 0.7rem;
   }
 }
