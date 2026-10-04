@@ -90,7 +90,7 @@ if (navigator.geolocation) {
 
 // ---------- Search + autosuggest ----------
 const SEARCH_URL = "https://duckduckgo.com/?q=";
-const SUGGEST_URL = "https://ac.duckduckgo.com/ac/?type=list&q=";
+const SUGGEST_URL = "https://search.dufferdonkey-499.workers.dev/?q=";
 
 const searchBox = document.getElementById("searchBox");
 
@@ -167,7 +167,11 @@ function searchDuckDuckGo() {
         signal: controller.signal,
       });
       const data = await res.json();
-      render(data.slice(0, 8).map((d) => d.phrase));
+      // Accepts [{phrase: "..."}] or ["query", ["s1", "s2"]]
+      const phrases = Array.isArray(data[1])
+        ? data[1]
+        : data.map((d) => d.phrase);
+      render(phrases.filter((p) => typeof p === "string" && p).slice(0, 8));
     } catch (err) {
       if (err.name !== "AbortError") hide();
     }
@@ -206,7 +210,6 @@ function searchDuckDuckGo() {
     if (list.style.display === "block") positionList();
   });
 })();
-
 // ---------- Dropdown menus ----------
 document.addEventListener("DOMContentLoaded", () => {
   const toggles = document.querySelectorAll(".dropdown-toggle");
