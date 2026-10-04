@@ -116,33 +116,6 @@ body {
   white-space: nowrap;
 }
 
-/* ---------- Search suggestions ---------- */
-#suggest-list {
-  display: none;
-  position: fixed;
-  z-index: 200;
-  margin: 0;
-  padding: 6px 0;
-  list-style: none;
-  background: #1e1e1e;
-  border: 1px solid #333;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
-
-#suggest-list li {
-  padding: 8px 16px;
-  color: #eee;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-#suggest-list li:hover,
-#suggest-list li.active {
-  background: #333;
-}
 /* ---------- Link grid / dropdowns ---------- */
 .grid {
   display: grid;
@@ -232,4 +205,112 @@ body {
   .clock-date {
     font-size: 0.7rem;
   }
+}
+
+
+/* ---------- Search bar (modern) ---------- */
+.search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 8px 8px 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search:focus-within {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4),
+              0 0 0 4px rgba(255, 255, 255, 0.06);
+}
+
+.search label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #888;
+  white-space: nowrap;
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 4px;
+  font-size: 1.1rem;
+  color: #eee;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.search input::placeholder {
+  color: #666;
+}
+
+.search button {
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #121212;
+  background: #eee;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.search button:hover {
+  background: #fff;
+  transform: scale(1.04);
+}
+
+.search button:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 500px) {
+  .search label {
+    display: none;
+  }
+  .search {
+    padding-left: 16px;
+  }
+}
+
+/* ---------- Search suggestions (modern) ---------- */
+#suggest-list {
+  display: none;
+  position: fixed;
+  z-index: 200;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  background: rgba(30, 30, 30, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+#suggest-list li {
+  padding: 10px 16px;
+  color: #eee;
+  cursor: pointer;
+  border-radius: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#suggest-list li:hover,
+#suggest-list li.active {
+  background: rgba(255, 255, 255, 0.1);
 }
