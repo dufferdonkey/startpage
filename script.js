@@ -88,17 +88,124 @@ if (navigator.geolocation) {
   document.getElementById("weather-desc").textContent = "Geolocation unsupported";
 }
 
-// ---------- Search ----------
+// ---------- Search + autosuggest ----------
+const SEARCH_URL = "https://duckduckgo.com/?q=";
+const SUGGEST_URL = "https://ac.duckduckgo.com/ac/?type=list&q=";
+
+const searchBox = document.getElementById("searchBox");
+
 function searchDuckDuckGo() {
-  const query = document.getElementById("searchBox").value.trim();
-  if (query) {
-    window.open(`https://duckduckgo.com/?q=${encodeURIComponent(query)}`, "_blank");
-  }
+  const query = searchBox.value.trim();
+  if (query) window.open(SEARCH_URL + encodeURIComponent(query), "_blank");
 }
 
-document.getElementById("searchBox").addEventListener("keydown", (e) => {
-  if (e.key === "Enter") searchDuckDuckGo();
-});
+(function setupAutosuggest() {
+  const list = document.createElement("ul");
+  list.id = "suggest-list";
+  list.setAttribute("role", "listbox");
+  document.body.appendChild(list);
+
+  let items = [];
+  let activeIndex = -1;
+  let typedValue = "";
+  let controller = null;
+  let debounceTimer = null;
+
+  function positionList() {
+    const r = searchBox.getBoundingClientRect();
+    list.style.left = `${r.left}px`;
+    list.style.top = `${r.bottom + 4}px`;
+    list.style.width = `${r.width}px`;
+  }
+
+  function hide() {
+    list.style.display = "none";
+    items = [];
+    activeIndex = -1;
+  }
+
+  function setActive(index) {
+    const lis = list.children;
+    if (lis[activeIndex]) lis[activeIndex].classList.remove("active");
+    activeIndex = index;
+    if (index >= 0) {
+      lis[index].classList.add("active");
+      searchBox.value = items[index];
+    } else {
+      searchBox.value = typedValue;
+    }
+  }
+
+  function render(suggestions) {
+    items = suggestions;
+    activeIndex = -1;
+    list.innerHTML = "";
+    if (!items.length) return hide();
+
+    items.forEach((text) => {
+      const li = document.createElement("li");
+      li.textContent = text;
+      li.setAttribute("role", "option");
+      li.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        searchBox.value = text;
+        hide();
+        searchDuckDuckGo();
+      });
+      list.appendChild(li);
+    });
+
+    positionList();
+    list.style.display = "block";
+  }
+
+  async function fetchSuggestions(query) {
+    if (controller) controller.abort();
+    controller = new AbortController();
+    try {
+      const res = await fetch(SUGGEST_URL + encodeURIComponent(query), {
+        signal: controller.signal,
+      });
+      const data = await res.json();
+      render(data.slice(0, 8).map((d) => d.phrase));
+    } catch (err) {
+      if (err.name !== "AbortError") hide();
+    }
+  }
+
+  searchBox.addEventListener("input", () => {
+    typedValue = searchBox.value;
+    const q = typedValue.trim();
+    clearTimeout(debounceTimer);
+    if (!q) return hide();
+    debounceTimer = setTimeout(() => fetchSuggestions(q), 150);
+  });
+
+  searchBox.addEventListener("keydown", (e) => {
+    const open = list.style.display === "block";
+
+    if (e.key === "Enter") {
+      hide();
+      searchDuckDuckGo();
+    } else if (!open) {
+      return;
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActive(activeIndex + 1 >= items.length ? -1 : activeIndex + 1);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActive(activeIndex - 1 < -1 ? items.length - 1 : activeIndex - 1);
+    } else if (e.key === "Escape") {
+      searchBox.value = typedValue;
+      hide();
+    }
+  });
+
+  searchBox.addEventListener("blur", () => setTimeout(hide, 100));
+  window.addEventListener("resize", () => {
+    if (list.style.display === "block") positionList();
+  });
+})();
 
 // ---------- Dropdown menus ----------
 document.addEventListener("DOMContentLoaded", () => {
